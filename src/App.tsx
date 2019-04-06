@@ -16,10 +16,10 @@ import {
 import { Test } from "./components/Test";
 
 interface IAppProps {
-  getLeagueById?: LeagueActionFunction;
-  getLeagueResultsById?: LeagueActionFunction;
-  getLeagueContestantsById?: LeagueActionFunction;
-  leagues?: ILeagueState;
+  getLeagueById: LeagueActionFunction;
+  getLeagueResultsById: LeagueActionFunction;
+  getLeagueContestantsById: LeagueActionFunction;
+  leagues: ILeagueState;
 }
 
 export class AppComponent extends React.Component<IAppProps> {
