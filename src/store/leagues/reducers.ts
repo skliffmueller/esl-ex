@@ -1,117 +1,139 @@
-import { suffixTypes } from "../../middlewares/axios";
+import { AnyAction } from "redux";
 
 import {
+  LeagueActions,
   ILeagueState,
-  GET_LEAGUE_BY_ID,
-  GET_LEAGUE_RESULTS_BY_ID,
-  GET_LEAGUE_CONTESTANTS_BY_ID,
-  ILeagueActionResponse,
+  GET_LEAGUE,
+  GET_LEAGUE_SUCCESS,
+  GET_LEAGUE_ERROR,
+  GET_LEAGUE_RESULTS,
+  GET_LEAGUE_RESULTS_SUCCESS,
+  GET_LEAGUE_RESULTS_ERROR,
+  GET_LEAGUE_CONTESTANTS,
+  GET_LEAGUE_CONTESTANTS_SUCCESS,
+  GET_LEAGUE_CONTESTANTS_ERROR,
 } from "./types";
 
-const initialState: ILeagueState = {
-  getLeagueById: {
+import {
+  mapLeague,
+  mapLeagueResults,
+  mapLeagueContestants,
+  ILeagueStateModel,
+} from "./schemas";
+
+const initialState: ILeagueStateModel = {
+  league: null,
+  contestants: [],
+  results: [],
+  getLeague: {
     loading: false,
     success: false,
-    failure: false,
+    error: false,
   },
-  getLeagueResultsById: {
+  getLeagueResults: {
     loading: false,
     success: false,
-    failure: false,
+    error: false,
   },
-  getLeagueContestantsById: {
+  getLeagueContestants: {
     loading: false,
     success: false,
-    failure: false,
+    error: false,
   },
 };
 
 export function leaguesReducer(
   state = initialState,
-  action: ILeagueActionResponse,
-): ILeagueState {
+  action: LeagueActions | AnyAction,
+): ILeagueStateModel {
   switch (action.type) {
-    case GET_LEAGUE_BY_ID:
+    case GET_LEAGUE:
       return {
         ...state,
-        getLeagueById: {
+        league: null,
+        getLeague: {
           loading: true,
           success: false,
-          failure: false,
+          error: false,
         },
       };
-    case `${GET_LEAGUE_BY_ID}${suffixTypes.successSuffix}`:
+    case GET_LEAGUE_SUCCESS:
       return {
         ...state,
-        getLeagueById: {
+        league: mapLeague(action.payload),
+        getLeague: {
           loading: false,
           success: action.payload,
-          failure: false,
+          error: false,
         },
       };
-    case `${GET_LEAGUE_BY_ID}${suffixTypes.errorSuffix}`:
+    case GET_LEAGUE_ERROR:
       return {
         ...state,
-        getLeagueById: {
+        getLeague: {
           loading: false,
           success: false,
-          failure: action.error,
+          error: action.error,
         },
       };
 
-    case GET_LEAGUE_RESULTS_BY_ID:
+    case GET_LEAGUE_RESULTS:
       return {
         ...state,
-        getLeagueResultsById: {
+        results: [],
+        getLeagueResults: {
           loading: true,
           success: false,
-          failure: false,
+          error: false,
         },
       };
-    case `${GET_LEAGUE_RESULTS_BY_ID}${suffixTypes.successSuffix}`:
+    case GET_LEAGUE_RESULTS_SUCCESS:
       return {
         ...state,
-        getLeagueResultsById: {
+        results: mapLeagueResults(action.payload),
+        getLeagueResults: {
           loading: false,
           success: action.payload,
-          failure: false,
+          error: false,
         },
       };
-    case `${GET_LEAGUE_RESULTS_BY_ID}${suffixTypes.errorSuffix}`:
+    case GET_LEAGUE_RESULTS_ERROR:
       return {
         ...state,
-        getLeagueResultsById: {
+        getLeagueResults: {
           loading: false,
           success: false,
-          failure: action.error,
+          error: action.error,
         },
       };
 
-    case GET_LEAGUE_CONTESTANTS_BY_ID:
+    case GET_LEAGUE_CONTESTANTS:
       return {
         ...state,
-        getLeagueContestantsById: {
+        contestants: [],
+        getLeagueContestants: {
           loading: true,
           success: false,
-          failure: false,
+          error: false,
         },
       };
-    case `${GET_LEAGUE_CONTESTANTS_BY_ID}${suffixTypes.successSuffix}`:
+    case GET_LEAGUE_CONTESTANTS_SUCCESS:
       return {
         ...state,
-        getLeagueContestantsById: {
+        contestants: mapLeagueContestants(action.payload),
+        getLeagueContestants: {
           loading: false,
           success: action.payload,
-          failure: false,
+          error: false,
         },
       };
-    case `${GET_LEAGUE_CONTESTANTS_BY_ID}${suffixTypes.errorSuffix}`:
+    case GET_LEAGUE_CONTESTANTS_ERROR:
       return {
         ...state,
-        getLeagueContestantsById: {
+        getLeagueContestants: {
           loading: false,
           success: false,
-          failure: action.error,
+          error: action.error,
         },
       };
   }

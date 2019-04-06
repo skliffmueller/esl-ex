@@ -3,6 +3,6 @@ declare module "axios-redux-types" {
   export interface IPayloadObject {
     loading: boolean;
     success: boolean | AxiosResponse;
-    failure: boolean | AxiosError;
+    error: boolean | AxiosError;
   }
 }

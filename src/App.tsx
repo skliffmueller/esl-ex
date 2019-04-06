@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 
 import { AppState } from "./store";
 import {
-  getLeagueById,
-  getLeagueResultsById,
-  getLeagueContestantsById,
+  getLeague,
+  getLeagueResults,
+  getLeagueContestants,
 } from "./store/leagues/actions";
 import {
   ILeagueState,
@@ -16,23 +16,23 @@ import {
 import { Test } from "./components/Test";
 
 interface IAppProps {
-  getLeagueById: LeagueActionFunction;
-  getLeagueResultsById: LeagueActionFunction;
-  getLeagueContestantsById: LeagueActionFunction;
-  leagues: ILeagueState;
+  getLeague: LeagueActionFunction;
+  getLeagueResults: LeagueActionFunction;
+  getLeagueContestants: LeagueActionFunction;
+  leaguesState: ILeagueState;
 }
 
 export class AppComponent extends React.Component<IAppProps> {
   componentWillMount() {
     const {
-      getLeagueById,
-      getLeagueResultsById,
-      getLeagueContestantsById,
+      getLeague,
+      getLeagueResults,
+      getLeagueContestants,
     } = this.props;
 
-    getLeagueById(177161);
-    getLeagueResultsById(177161);
-    getLeagueContestantsById(177161);
+    getLeague(177161);
+    getLeagueResults(177161);
+    getLeagueContestants(177161);
   }
   render() {
     return (
@@ -45,15 +45,15 @@ export class AppComponent extends React.Component<IAppProps> {
 
 const mapStateToProps = (state: AppState) => {
   return {
-    leagues: state.leagues,
+    leaguesState: state.leagues,
   };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    getLeagueById: getLeagueById(dispatch),
-    getLeagueResultsById: getLeagueResultsById(dispatch),
-    getLeagueContestantsById: getLeagueContestantsById(dispatch),
+    getLeague: getLeague(dispatch),
+    getLeagueResults: getLeagueResults(dispatch),
+    getLeagueContestants: getLeagueContestants(dispatch),
   };
 };
 
