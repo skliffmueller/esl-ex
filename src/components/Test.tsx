@@ -1,7 +1,7 @@
 import * as React from "react";
 import "./Test.scss";
 
-export interface ITestProps { message: string; counter: number; }
+export interface ITestProps { message: string; }
 
 // 'HelloProps' describes the shape of props.
 // State is never set so we use the '{}' type.
@@ -10,7 +10,6 @@ export class Test extends React.Component<ITestProps, {}> {
     return (
       <div className="content">
         <h1>{this.props.message}</h1>
-        <h2>{this.props.counter}</h2>
       </div>
     );
   }

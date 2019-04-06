@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 
-import { testReducer } from "./test/reducers";
+import { leaguesReducer } from "./leagues/reducers";
 
 export const rootReducer = combineReducers({
-  test: testReducer,
+  leagues: leaguesReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;

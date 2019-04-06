@@ -1,33 +1,43 @@
 import * as React from "react";
 import { Dispatch } from "redux";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 
 import { AppState } from "./store";
 import {
-  testDecrease,
-  testIncrease,
-} from "./store/test/actions";
+  getLeagueById,
+  getLeagueResultsById,
+  getLeagueContestantsById,
+} from "./store/leagues/actions";
 import {
-  ITestState,
-} from "./store/test/types";
+  ILeagueState,
+  LeagueActionFunction,
+} from "./store/leagues/types";
 
 import { Test } from "./components/Test";
 
-interface AppProps {
-  increaseState: typeof testIncrease;
-  decreaseState: typeof testDecrease;
-  test: ITestState;
+interface IAppProps {
+  getLeagueById?: LeagueActionFunction;
+  getLeagueResultsById?: LeagueActionFunction;
+  getLeagueContestantsById?: LeagueActionFunction;
+  leagues?: ILeagueState;
 }
 
-export class AppComponent extends React.Component<AppProps> {
-  onIncreaseClick = () => (this.props.increaseState(1));
-  onDecreaseClick = () => (this.props.decreaseState(1));
+export class AppComponent extends React.Component<IAppProps> {
+  componentWillMount() {
+    const {
+      getLeagueById,
+      getLeagueResultsById,
+      getLeagueContestantsById,
+    } = this.props;
+
+    getLeagueById(177161);
+    getLeagueResultsById(177161);
+    getLeagueContestantsById(177161);
+  }
   render() {
     return (
       <>
-        <button onClick={this.onIncreaseClick}>Increase</button>
-        <button onClick={this.onDecreaseClick}>Decrease</button>
-        <Test message="Hello World!" counter={this.props.test.counter} />
+        <Test message="Hello World!" />
       </>
     );
   }
@@ -35,18 +45,15 @@ export class AppComponent extends React.Component<AppProps> {
 
 const mapStateToProps = (state: AppState) => {
   return {
-    test: state.test,
+    leagues: state.leagues,
   };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    increaseState: (id: number) => {
-      dispatch(testIncrease(id));
-    },
-    decreaseState: (id: number) => {
-      dispatch(testDecrease(id));
-    },
+    getLeagueById: getLeagueById(dispatch),
+    getLeagueResultsById: getLeagueResultsById(dispatch),
+    getLeagueContestantsById: getLeagueContestantsById(dispatch),
   };
 };
 
