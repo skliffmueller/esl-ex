@@ -87,7 +87,7 @@ export class LeaguesContainer extends React.Component<ILeaguesContainerProps> {
     }
 
     const title = league ? league.name.full : "";
-    const date = league ? moment(league.timeline.inProgress.begin).format("wo MMMM YYYY") : "";
+    const date = league ? moment(league.timeline.inProgress.begin).format("Do MMMM YYYY") : "";
 
     const resultsTemplate = results
       .sort((a, b) => {
