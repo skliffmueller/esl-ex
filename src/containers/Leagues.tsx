@@ -92,15 +92,15 @@ export class LeaguesContainer extends React.Component<ILeaguesContainerProps> {
     const resultsTemplate = results
       .sort((a, b) => {
         if (order === "descending") {
-          return (a.id - b.id);
+          return (b.id - a.id);
         }
-        return (b.id - a.id);
+        return (a.id - b.id);
       })
       .sort((a, b) => {
         if (order === "descending") {
-          return (a.beginAt.valueOf() - b.beginAt.valueOf());
+          return (b.beginAt.valueOf() - a.beginAt.valueOf());
         }
-        return (b.beginAt.valueOf() - a.beginAt.valueOf());
+        return (a.beginAt.valueOf() - b.beginAt.valueOf());
       })
       .map((r) => {
         const time = moment(r.beginAt).format("HH:mm");
