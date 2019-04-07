@@ -1,4 +1,5 @@
 import * as React from "react";
+import {BrowserRouter as Router, Route, Link, RouteComponentProps} from "react-router-dom";
 import { Dispatch } from "redux";
 import { connect } from "react-redux";
 
@@ -25,12 +26,25 @@ interface IAppProps {
   leaguesState: ILeagueStateModel;
 }
 
+function Index() {
+  return <h1>Index</h1>;
+}
+
 export class AppComponent extends React.Component<IAppProps> {
+  leaguesContainerRenderer = (props: RouteComponentProps<{leagueId: string}>) => {
+    return <LeaguesContainer {...this.props} leagueId={Number(props.match.params.leagueId)} />;
+  }
+
   render() {
     return (
-      <>
-        <LeaguesContainer {...this.props} />
-      </>
+      <Router>
+        <div className="AppNav">
+          <Link to="/leagues/177160">League 177160</Link>
+          <Link to="/leagues/177161">League 177161</Link>
+          <Link to="/leagues/185553">League 185553</Link>
+        </div>
+        <Route path="/leagues/:leagueId" render={this.leaguesContainerRenderer} />
+      </Router>
     );
   }
 }

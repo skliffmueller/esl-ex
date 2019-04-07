@@ -15,9 +15,11 @@ import {
   LeagueButton,
   LeagueResults,
 } from "../components/League";
+import {IPayloadObject} from "axios-redux-types";
 
 
 interface ILeaguesContainerProps {
+  leagueId: number;
   leaguesActions: ILeaguesActions;
   leaguesState: ILeagueStateModel;
 }
@@ -25,18 +27,28 @@ interface ILeaguesContainerProps {
 export class LeaguesContainer extends React.Component<ILeaguesContainerProps> {
   state = {
     order: "ascending",
-  }
+  };
 
   componentWillMount() {
+    this.updateLeagueData(this.props.leagueId);
+  }
+
+  componentWillUpdate(nextProps: ILeaguesContainerProps) {
+    if (this.props.leagueId !== nextProps.leagueId) {
+      this.updateLeagueData(nextProps.leagueId);
+    }
+  }
+
+  updateLeagueData = (leagueId: number) => {
     const {
       getLeague,
       getLeagueResults,
       getLeagueContestants,
     } = this.props.leaguesActions;
 
-    getLeague(177161);
-    getLeagueResults(177161);
-    getLeagueContestants(177161);
+    getLeague(leagueId);
+    getLeagueResults(leagueId);
+    getLeagueContestants(leagueId);
   }
 
   lookupParticipantName = (participantId: number): string => {
@@ -55,10 +67,24 @@ export class LeaguesContainer extends React.Component<ILeaguesContainerProps> {
     const {
       league,
       results,
+      contestants,
+      getLeague,
+      getLeagueResults,
+      getLeagueContestants,
     } = this.props.leaguesState;
     const {
       order,
     } = this.state;
+
+    if (!league || !results.length || !contestants.length) {
+      if(getLeague.success && getLeagueResults.success && getLeagueContestants.success) {
+        return <h3>Something horrible has happen</h3>;
+      }
+      if (getLeague.error || getLeagueResults.error || getLeagueContestants.error) {
+        return <h3>Something horrible has happen</h3>;
+      }
+      return <h1>Loading...</h1>;
+    }
 
     const title = league ? league.name.full : "";
     const date = league ? moment(league.timeline.inProgress.begin).format("wo MMMM YYYY") : "";
@@ -78,6 +104,10 @@ export class LeaguesContainer extends React.Component<ILeaguesContainerProps> {
       })
       .map((r) => {
         const time = moment(r.beginAt).format("HH:mm");
+        if (r.participants.find((p) => (p.id === 0))) {
+          // If id is 0, assume Buy
+          return null;
+        }
         const participants = r.participants.map((p) => {
           return {
             key: p.id,
@@ -88,7 +118,7 @@ export class LeaguesContainer extends React.Component<ILeaguesContainerProps> {
           };
         });
         return <LeagueResults key={r.id} time={time} participants={participants} />;
-      });
+      }).filter((r) => (r));
 
     const toolsTemplate = <LeagueButton onClick={this.dateButtonOnClick} content={"Date"} order={order} />;
 

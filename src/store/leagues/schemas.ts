@@ -49,6 +49,8 @@ export interface ILeagueStateModel extends ILeagueState {
 
 export function mapLeague(response: AxiosResponse): ILeagueSchema {
   const { data } = response;
+  const begin = data.timeline && data.timeline.inProgress && data.timeline.inProgress.begin;
+  const end = data.timeline && data.timeline.inProgress && data.timeline.inProgress.end;
   return {
     id: data.id,
     name: {
@@ -58,8 +60,8 @@ export function mapLeague(response: AxiosResponse): ILeagueSchema {
     },
     timeline: {
       inProgress: {
-        begin: new Date(data.timeline.inProgress.begin),
-        end: new Date(data.timeline.inProgress.end),
+        begin: begin ? new Date(begin) : null,
+        end: end ? new Date(end) : null,
       },
     },
   };

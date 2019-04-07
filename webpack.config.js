@@ -15,6 +15,7 @@ const base = {
   output: {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: "/"
   },
 
   optimization: {
@@ -61,6 +62,7 @@ const base = {
       minify: isProduction,
       hash: isProduction,
       cache: !isProduction,
+      metadata: { baseUrl: './' },
     })
   ]
 };
@@ -83,6 +85,7 @@ const dev = {
     open: true,
     host: 'localhost',
     port: 9000,
+    historyApiFallback: true,
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
