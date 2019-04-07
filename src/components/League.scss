@@ -1,0 +1,145 @@
+$default-color: #E2E5EA;
+$success-color: #28B662;
+$danger-color: #E43726;
+
+$header-border-color: #28B662;
+$header-primary-color: #333333;
+$header-background-color: #FFFFFF;
+
+$button-primary-color: #333333;
+$button-border-color: #BDC3C7;
+$button-background-color: #FFFFFF;
+
+$content-background-color: #FFFFFF;
+
+$result-primary-color: #333333;
+$result-secondary-color: #818F8F;
+$result-border-color: #E2E5EA;
+
+.LeagueHeader, .LeagueContent {
+  margin: 16px;
+  width: 500px;
+  max-width: 500px;
+  border-radius: 2px;
+}
+
+.LeagueHeader {
+  background-color: $header-background-color;
+  border-top: solid 6px $header-border-color;
+  .LeagueHeader-wrapper {
+    padding: 16px;
+  }
+  .LeagueHeader-title {
+    margin: 3px 0;
+    font-weight: bold;
+    font-size: 21px;
+    color: $header-primary-color;
+  }
+  .LeagueHeader-date {
+    margin: 2px 0;
+    font-size: 14px;
+    font-weight: normal;
+    color: $header-primary-color;
+  }
+}
+
+.LeagueButton {
+  position: relative;
+  padding: 5px 23px 5px 8px;
+  margin-right: 8px;
+  border: solid 1px $button-border-color;
+  border-radius: 2px;
+  background-color: $button-background-color;
+  cursor: pointer;
+  font-size: 14px;
+  color: $button-primary-color;
+  
+  &:after {
+    display: block;
+    position: absolute;
+    transform: translateY(-50%);
+    right: 8px;
+    top: 50%;
+    width: 0;
+    height: 0;
+  }
+  &.LeagueButton--ascending {
+    &:after {
+      content: " ";
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 5px solid $button-primary-color;
+    }
+  }
+  &.LeagueButton--descending {
+    &:after {
+      content: " ";
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid $button-primary-color;
+    }
+  }
+}
+
+.LeagueContent {
+  background-color: $content-background-color;
+  .LeagueContent-tools {
+    padding: 16px 18px 0 18px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.LeagueResult {
+  padding: 16px;
+  border-bottom: solid 1px $result-border-color;
+  .LeagueResult-time {
+    font-size: 14px;
+    color: $result-secondary-color;
+  }
+  .LeagueResult-name {
+    font-size: 16px;
+    color: $result-primary-color;
+  }
+  .LeagueResult-score {
+    font-size: 21px;
+    text-align: center;
+    color: $result-primary-color;
+  }
+}
+
+.LeagueParticipant {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 2px 0px 10px;
+  margin: 8px 0;
+  &::after {
+    display: block;
+    content: "";
+    position: absolute;
+    width: 4px;
+    left: -2px;
+    top: calc(50% - 11px);
+    height: 22px;
+    background-color: $default-color;
+    border-radius: 2px 0px 0px 2px;
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
+  &.LeagueParticipant--winner {
+    &::after {
+      background-color: $success-color;
+    }
+    .LeagueResult-score {
+      font-weight: bold;
+    }
+  }
+  &.LeagueParticipant--loser {
+    &::after {
+      background-color: $danger-color;
+    }
+  }
+}

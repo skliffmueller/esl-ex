@@ -10,7 +10,7 @@ export interface ILeagueSchema {
   };
   timeline: {
     inProgress: {
-      being: Date;
+      begin: Date;
       end: Date;
     };
   };
@@ -58,7 +58,7 @@ export function mapLeague(response: AxiosResponse): ILeagueSchema {
     },
     timeline: {
       inProgress: {
-        being: new Date(data.timeline.inProgress.begin),
+        begin: new Date(data.timeline.inProgress.begin),
         end: new Date(data.timeline.inProgress.end),
       },
     },

@@ -2,6 +2,8 @@ import * as React from "react";
 import { Dispatch } from "redux";
 import { connect } from "react-redux";
 
+import "./App.scss";
+
 import { AppState } from "./store";
 import {
   getLeague,
@@ -9,35 +11,25 @@ import {
   getLeagueContestants,
 } from "./store/leagues/actions";
 import {
-  ILeagueState,
-  LeagueActionFunction,
+  ILeaguesActions,
 } from "./store/leagues/types";
+import {
+  ILeagueStateModel,
+} from "./store/leagues/schemas";
 
-import { Test } from "./components/Test";
+
+import { LeaguesContainer } from "./containers/Leagues";
 
 interface IAppProps {
-  getLeague: LeagueActionFunction;
-  getLeagueResults: LeagueActionFunction;
-  getLeagueContestants: LeagueActionFunction;
-  leaguesState: ILeagueState;
+  leaguesActions: ILeaguesActions;
+  leaguesState: ILeagueStateModel;
 }
 
 export class AppComponent extends React.Component<IAppProps> {
-  componentWillMount() {
-    const {
-      getLeague,
-      getLeagueResults,
-      getLeagueContestants,
-    } = this.props;
-
-    getLeague(177161);
-    getLeagueResults(177161);
-    getLeagueContestants(177161);
-  }
   render() {
     return (
       <>
-        <Test message="Hello World!" />
+        <LeaguesContainer {...this.props} />
       </>
     );
   }
@@ -51,9 +43,11 @@ const mapStateToProps = (state: AppState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    getLeague: getLeague(dispatch),
-    getLeagueResults: getLeagueResults(dispatch),
-    getLeagueContestants: getLeagueContestants(dispatch),
+    leaguesActions: {
+      getLeague: getLeague(dispatch),
+      getLeagueResults: getLeagueResults(dispatch),
+      getLeagueContestants: getLeagueContestants(dispatch),
+    },
   };
 };
 

@@ -60,3 +60,9 @@ export interface ILeagueState {
   getLeagueResults: IPayloadObject;
   getLeagueContestants: IPayloadObject;
 }
+
+export interface ILeaguesActions {
+  getLeague: LeagueActionFunction;
+  getLeagueResults: LeagueActionFunction;
+  getLeagueContestants: LeagueActionFunction;
+}
