@@ -1,24 +1,33 @@
 # ESL Leagues React App
 
-This is a react app to show a developers potential when given a project to reproduce.
+This is a react app challenge given by ESL.
+
+## Demo
+
+You may access a running instance of the project at: http://esl-ex.rasterized.net
+
+## Before you begin
+
+This application has been developed using node version 10.15.3. A useful utility for switching between node versions is nvm.
+
+NVM for windows:
+
+https://github.com/coreybutler/nvm-windows/releases
+
+or follow the guide for all other operating systems:
+
+https://github.com/creationix/nvm#installation-and-update
+
+Once installed you may run `nvm install 10.15.3`
+
+Note: Sometimes when switching versions in nvm, node-sass tends to break, to fix this just run `npm rebuild node-sass`
 
 ## Installation
 
-First you must install some global npm modules. Here are the basics to install:
-
-```bash
-npm install -g webpack typescript webpack-dev-server
-```
-
-Now simply run a regular npm install
+First run npm install:
 
 ```bash
 npm install
-```
-
-The module tslint is optional to install
-```bash
-npm install -g tslint
 ```
 
 ## Running the application
@@ -29,16 +38,46 @@ For running as a developer just simply run the following:
 npm run start:dev
 ```
 
+If you'd like to use a different port, simply set PORT env to the port you desire. Example:
+
+```bash
+PORT=8080 npm run start:dev
+```
+
 Sometimes, the browser will not open automatically due to permission issues. After the app has bundled, you may open your browser and access http://localhost:9000/ to see the application.
+
+Keep in mind, you will have to disable CORS on the browser you use. Microsoft Edge cannot disable cores, but Firefox and Chrome, you can disable CORS.
+
+Firefox, you must install a plugin to disable CORS. The plugin is available here: https://addons.mozilla.org/en-US/firefox/addon/cross-domain-cors/
+
+Chrome, you can disable cors via the command line: https://stackoverflow.com/a/6083677
 
 To make a production build run the following:
 
-```angular2html
+```bash
 NODE_ENV=production npm run build
 ```
 
-## tslint
+You must run tslint and fix any syntax errors before running a production deployment (docker build):
 
-```
+```bash
 npm run tslint
 ```
+
+## Deployment
+
+First you must build the docker image:
+
+```bash
+docker build -t esl-ex:latest .
+```
+
+To run the image, you must expose port 3000:
+
+```bash
+docker run -d -p 3000:3000 esl-ex:latest
+```
+
+You should be able to access the server at http://localhost:3000/ if running locally. Or the server you are deploying too http://<domain/ip>:3000/
+
+Note: If you get any tslint errors, you may need to correct the syntax tslint is shouting at you about.

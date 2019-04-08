@@ -15,7 +15,6 @@ import {
   LeagueButton,
   LeagueResults,
 } from "../components/League";
-import {IPayloadObject} from "axios-redux-types";
 
 
 interface ILeaguesContainerProps {
@@ -77,7 +76,7 @@ export class LeaguesContainer extends React.Component<ILeaguesContainerProps> {
     } = this.state;
 
     if (!league || !results.length || !contestants.length) {
-      if(getLeague.success && getLeagueResults.success && getLeagueContestants.success) {
+      if (getLeague.success && getLeagueResults.success && getLeagueContestants.success) {
         return <h3>Something horrible has happen</h3>;
       }
       if (getLeague.error || getLeagueResults.error || getLeagueContestants.error) {

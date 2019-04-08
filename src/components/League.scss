@@ -113,7 +113,7 @@ $result-border-color: #E2E5EA;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 2px 0px 10px;
+  padding: 0 2px 0 10px;
   margin: 8px 0;
   &::after {
     display: block;
@@ -124,7 +124,7 @@ $result-border-color: #E2E5EA;
     top: calc(50% - 11px);
     height: 22px;
     background-color: $default-color;
-    border-radius: 2px 0px 0px 2px;
+    border-radius: 2px 0 0 2px;
   }
   &:last-child {
     margin-bottom: 0;

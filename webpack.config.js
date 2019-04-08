@@ -84,7 +84,7 @@ const dev = {
     hot: true,
     open: true,
     host: 'localhost',
-    port: 9000,
+    port: process.env.PORT || 3000,
     historyApiFallback: true,
   },
   plugins: [
