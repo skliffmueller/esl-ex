@@ -1,3 +1,7 @@
+/*
+ * This defines the structure we'd like the redux states to be
+ * This file also provides functions to transform/reduce the Axios response data into the provided structures
+ */
 import { ILeagueState } from "./types";
 import { AxiosResponse } from "axios";
 

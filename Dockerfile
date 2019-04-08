@@ -107,7 +107,10 @@ RUN npm install
 # Everything except from .dockerignore is copied
 ADD ./ .
 
+# Verify tslint and fail if there are problems
 RUN npm run tslint
+
+# webpack build
 RUN npm run build
 
 EXPOSE 3000

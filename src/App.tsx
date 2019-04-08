@@ -1,5 +1,9 @@
+/*
+ * The App component is responsible for handling the routes, and feeding the redux states
+ * to the components/containers
+ */
 import * as React from "react";
-import {BrowserRouter as Router, Route, Link, RouteComponentProps} from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, RouteComponentProps } from "react-router-dom";
 import { Dispatch } from "redux";
 import { connect } from "react-redux";
 
@@ -26,11 +30,8 @@ interface IAppProps {
   leaguesState: ILeagueStateModel;
 }
 
-function Index() {
-  return <h1>Index</h1>;
-}
-
 export class AppComponent extends React.Component<IAppProps> {
+  // Using a functional renderer to properly bind props into the container
   leaguesContainerRenderer = (props: RouteComponentProps<{leagueId: string}>) => {
     return <LeaguesContainer {...this.props} leagueId={Number(props.match.params.leagueId)} />;
   }

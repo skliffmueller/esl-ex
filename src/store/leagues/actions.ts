@@ -1,3 +1,6 @@
+/*
+ * These actions are based off the API docs provided by ESL https://docs.tet.io/
+ */
 import { Dispatch } from "redux";
 
 import {

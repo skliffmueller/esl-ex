@@ -1,3 +1,8 @@
+/*
+ * redux-axios-middleware does not have typings! WTF
+ * So this is supposed to give it type definitions
+ * Copied from a Pull Request https://github.com/svrcekmichal/redux-axios-middleware/pull/69
+ */
 declare module "redux-axios-middleware" {
   import axios, {AxiosInstance, AxiosError, AxiosResponse} from "axios";
 

@@ -1,8 +1,12 @@
+/*
+ * This is a pretty standard setup of a redux reducer
+ * The only thing outside of a typical structure is the map functions
+ * These map functions reduce the axios response data into a structure that is easier to manage
+ */
 import { AnyAction } from "redux";
 
 import {
   LeagueActions,
-  ILeagueState,
   GET_LEAGUE,
   GET_LEAGUE_SUCCESS,
   GET_LEAGUE_ERROR,

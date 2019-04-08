@@ -1,3 +1,6 @@
+/*
+ * This file is responsible for defining the structure of all actions and redux states in the reducers
+ */
 import { AxiosResponse, AxiosError, AxiosRequestConfig } from "axios";
 import { IPayloadObject } from "axios-redux-types";
 import { AnyAction } from "redux";

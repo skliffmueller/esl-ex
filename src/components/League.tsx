@@ -1,3 +1,7 @@
+/*
+ * This contains all the functional components for rendering the data into a more user friendly UI.
+ * The Leagues container is responsible for feeding these guys data.
+ */
 import * as React from "react";
 import classNames from "classnames";
 

@@ -19,6 +19,7 @@ const base = {
   },
 
   optimization: {
+    // This should separate the vendor modules (node_modules) from the main app bundle
     splitChunks: {
       chunks: 'all',
     },
@@ -35,6 +36,10 @@ const base = {
   module: {
     rules: [
       {
+        // postcss-loader is convinient in making sure we can target browser versions
+        // appropriately, and will add in all the nessesary modifiers per browser
+        // postcss-loader uses some of it's own modules plus cssnano
+        // everything can be configured in postcss.config.js located in the root of this project
         test: /\.(sa|sc|c)ss$/,
         use: [
           'style-loader',
@@ -44,6 +49,8 @@ const base = {
         ],
       },
       {
+        // awesome-typescript-loader was selected for performance gains
+        // It is maintained and developed by the webpack team
         test: /\.tsx?$/,
         loader: 'awesome-typescript-loader',
       },
@@ -55,6 +62,8 @@ const base = {
     ],
   },
   plugins: [
+    // Cleans the dist folder after every build
+    // Convinient for webpack-dev-server watch bundling
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: 'src/index.html',
@@ -76,6 +85,7 @@ const dev = {
   },
   resolve: {
     alias: {
+      // We override the react-dom module with a built in hot reload module attached
       'react-dom': '@hot-loader/react-dom',
     },
   },
@@ -96,6 +106,8 @@ const prod = {
   mode: 'production',
   optimization: {
     minimizer: [
+      // TerserJSPlugin is the default webpack minimizer for JS, we just have to include it
+      // as we are specifying a different CSS minimizer
       new TerserJSPlugin(),
       new OptimizeCSSAssetsPlugin(),
     ]

@@ -10,6 +10,7 @@ import { App } from "./App";
 
 import { rootReducer } from "./store";
 
+// In a typical production environment we would remove composeWithDevTools
 const store = createStore(rootReducer, composeWithDevTools(
   applyMiddleware(
     axiosMiddleware,

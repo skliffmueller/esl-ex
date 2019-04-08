@@ -6,6 +6,28 @@ This is a react app challenge given by ESL.
 
 You may access a running instance of the project at: http://esl-ex.rasterized.net
 
+## Foundational Choices
+
+This is a react/redux application built out in typescript with some strict tslint rules.
+
+React router is also used for simple navigation.
+
+There is one redux middleware being utilized `redux-axios-middleware`
+
+The app uses SASS for styles, postcss-loader, and style-loader plugin in webpack.
+
+The CSS naming conventions follow the SUIT CSS naming conventions: https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md
+
+The webpack build process was built from the ground up, as well as the react app.
+
+## Some notes about the app
+
+Sometimes, the participants in a league results listing comes over with an ID of 0. This is an occasion I'm assuming the opposing team received a "Buy" round, and filter the particular round from the results.
+
+Deleted accounts still exist in the listing, as they do contain a participant ID.
+
+You may change the league ID in the url to view any results provided by the API, 3 links are provided in the app as examples.
+
 ## Before you begin
 
 This application has been developed using node version 10.15.3. A useful utility for switching between node versions is nvm.
