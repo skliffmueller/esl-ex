@@ -60,13 +60,13 @@ For running as a developer just simply run the following:
 npm run start:dev
 ```
 
+Sometimes, the browser will not open automatically due to permission issues. After the app has bundled, you may open your browser and access http://localhost:3000/ to see the application.
+
 If you'd like to use a different port, simply set PORT env to the port you desire. Example:
 
 ```bash
 PORT=8080 npm run start:dev
 ```
-
-Sometimes, the browser will not open automatically due to permission issues. After the app has bundled, you may open your browser and access http://localhost:3000/ to see the application.
 
 Keep in mind, you will have to disable CORS on the browser you use. Microsoft Edge cannot disable cores, but Firefox and Chrome, you can disable CORS.
 
